@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Cylinder Control</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative; /* Added position relative for absolute positioning of text */
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .cylinder-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+            margin-left: 50px;
+            margin-right: 50px;
+        }
+
+        .cylinder {
+            width: 200px;
+            height: 400px; /* Adjusted height for proper representation */
+            border: 2px solid #333;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+        }
+
+        .cylinder-name {
+            position: absolute;
+            top: 10px;
+            font-weight: bold;
+        }
+
+        .water-level {
+            background-color: blue;
+            position: absolute;
+            bottom: 20px; /* Adjusted bottom position for min level */
+            width: 100%;
+            transition: height 0.5s ease;
+        }
+
+        .pump-status {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-between; /* Adjusted alignment */
+        }
+
+        /* Added class for pump rectangles */
+        .pump-rectangle {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 30px;
+            background-color: #ccc;
+            border: 1px solid #333;
+            margin: 10px; /* Adjusted margin */
+        }
+
+        /* Adjusted margin-left for p2 rectangle */
+        .pump-rectangle.p2 {
+            margin-left: auto;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Water Cylinder Control</h1>
+
+    <div class="cylinder-container">
+        <div class="cylinder">
+            <div class="cylinder-name">cyl1</div>
+            <div class="water-level" id="cyl1WaterLevel"></div>
+            <div class="pump-status" id="pump1Status"></div>
+        </div>
+
+        <div class="cylinder">
+            <div class="cylinder-name">cyl2</div>
+            <div class="water-level" id="cyl2WaterLevel"></div>
+            <div class="pump-status" id="pump2Status"></div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="pump-rectangle">p1</div>
+        <div class="pump-rectangle p2">p2</div>
+    </div>
+</div>
+
+<script>
+    // Example data - replace with actual data from your device
+    const currentWaterLevel1 = 250;
+    const currentWaterLevel2 = 150;
+    const pump1Status = "On";
+    const pump2Status = "Off";
+
+    // Update water level and pump status
+    document.getElementById("cyl1WaterLevel").style.height = `${currentWaterLevel1}px`;
+    document.getElementById("cyl2WaterLevel").style.height = `${currentWaterLevel2}px`;
+    document.getElementById("pump1Status").innerText = `Pump 1: ${pump1Status}`;
+    document.getElementById("pump2Status").innerText = `Pump 2: ${pump2Status}`;
+</script>
+</body>
+</html>
