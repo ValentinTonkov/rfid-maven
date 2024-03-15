@@ -9,21 +9,28 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class RfidController {
-    private RfidEntry lastEntry;
+    private RfidEntry lastEntry = null;
     private final RfidRepository repository;
     public RfidController(RfidRepository repository){
         this.repository = repository;
     }
     @RequestMapping
     public String getScannedRfidInfo(){
-        StringBuilder builder = new StringBuilder();
-        repository.findAll().forEach((entry -> builder.append(entry.toString()).append("<br>")));
-        return builder.toString();
+        if (repository.count() > 0) {
+            StringBuilder builder = new StringBuilder();
+            repository.findAll().forEach((entry -> builder.append(entry.toString()).append("<br>")));
+            return builder.toString();
+        } else {
+            return "<center><h2>No scanned tags yet!</h2></center>";
+        }
     }
 
     @RequestMapping("/lastScanned")
     public String getLastScannedTag(){
-        return "<center><h2>" + lastEntry.toString() + "</h2></center>";
+        if (lastEntry != null) {
+            return "<center><h2>" + lastEntry + "</h2></center>";
+        }
+        return "<center><h2>No scanned tags yet!</h2></center>";
     }
 
 
