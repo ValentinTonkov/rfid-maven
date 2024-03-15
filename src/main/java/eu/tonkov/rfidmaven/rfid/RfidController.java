@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class RfidController {
+    private RfidEntry lastEntry;
     private final RfidRepository repository;
     public RfidController(RfidRepository repository){
         this.repository = repository;
@@ -20,10 +21,17 @@ public class RfidController {
         return builder.toString();
     }
 
+    @RequestMapping("/lastScanned")
+    public String getLastScannedTag(){
+        return "<center><h2>" + lastEntry.toString() + "</h2></center>";
+    }
+
 
     @PostMapping("/epc")
     public ResponseEntity<String> handleRfidInfoPost(@RequestBody RfidEntry entry){
         System.out.printf("epc: %s, operator: %s, dev_ip: %s\n", entry.getRfid_ex(), entry.getOperator(), entry.getDevice_ip());
+
+        lastEntry = entry;
 
         final String REFUSED_EPC = "E2000016601301261120A9B1";
 
